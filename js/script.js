@@ -1,10 +1,9 @@
-//Create random number generator from 1-6; should return random number//
-//passed//
+// Business Logic
 
 function Players(diceRoll) {
     this.diceRoll = diceRoll
-    this.score = 0;
-    this.roundPool = [];
+    this.keepscore = 0;
+    this.roundPool = 0;
 }
 
 let player1 = new Players(true);
@@ -15,26 +14,43 @@ Players.prototype.rollDice = function () {
 };
 
 function playersTurn() {
-    let roll = this.diceRoll();
+    let  players;
+    if (player1.diceRoll == true) {
+        players = player1;
+    } else if (player2.diceRoll == true) {
+        players = player2
+    }
+    return players;
+}
+
+
+function gameRules() {
+    let roll = diceRoll();
+    let Players = playersTurn
     while (roll !== 1) {
     turnScore += roll;
-    roll = this.rollDice();
+    roll = diceRoll();
     }
-    this.score += turnScore;
+    return Players;
 }
 
 function changeTurn() {
     if (player1.diceRoll == true) {
-        players = player1;
-    } else player2.diceRoll == false; {
-        players = player2;
+        player1.diceRoll = false;
+        player2.diceRoll = true;
+    } else {player1.diceRoll = true; 
+        player2.diceRoll =false;
     }
 }
-console.log(playersTurn);
-
 
 function endTurn() {
     if (keepScore[currentPlayer] >= 100) {
     return "Player" + currentPlayer + "wins!";
     }
 }
+
+// UI Loogic
+
+    window.addEventListener("load", function ()  {
+        document.getElementById("btn-roll").addEventListener("click", playersTurn());
+    });

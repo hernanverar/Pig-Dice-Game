@@ -19,3 +19,8 @@ output: Ramdom numbers between 1 & 6
 Description: Create two functions to host players turn and change of turns 
 test: console.logs
 code: function playersTurn() and function changeTurn();
+
+Description: 
+test: 
+code: 
+output:
