@@ -1,52 +1,40 @@
 //Create random number generator from 1-6; should return random number//
-//passed// 
+//passed//
 
-function Players(name, score, roundPool) {
-    this.name = name;
-    this.score = score;
+function Players(diceRoll) {
+    this.diceRoll = diceRoll
+    this.score = 0;
     this.roundPool = [];
 }
 
+let player1 = new Players(true);
+let player2 = new Players(false);
 
-let player1 = new Players("Erik");
-let player2 = new Players("Brandon");
-let activePlayer = 0;
-let currentPlayer = 0;
-let keepScore = [0, 0];
-
-
-// let playerRoll = 0;
 Players.prototype.rollDice = function () {
-    let roll = Math.floor(Math.random() * 6) + 1;
-    this.roundPool.push(roll);
-    return roll;
+  return Math.floor(Math.random() * 6) + 1;
+};
+
+function playersTurn() {
+    let roll = this.diceRoll();
+    while (roll !== 1) {
+    turnScore += roll;
+    roll = this.rollDice();
+    }
+    this.score += turnScore;
 }
 
-function keepRolling() {
-    keepScore[currentPlayer] += currentPlayer;
-    currentPlayer = (currentPlayer + 1) % 2;
+function changeTurn() {
+    if (player1.diceRoll == true) {
+        players = player1;
+    } else player2.diceRoll == false; {
+        players = player2;
+    }
 }
+console.log(playersTurn);
+
+
 function endTurn() {
     if (keepScore[currentPlayer] >= 100) {
-        return ('Player' + currentPlayer + "wins!");
+    return "Player" + currentPlayer + "wins!";
     }
-
-    Player.prototype.takeTurn = function () {
-        let turnScore = 0;
-        let roll = this.rollDice();
-        while (roll !== 1) {
-            turnScore += roll;
-            roll = this.rollDice();
-        }
-        this.score += turnScore;
-    }
-
-
-    keepRolling.addEventListener("click", function () {
-        playerRoll = Math.floor(Math.random() * 6) + 1;
-        if (playerRoll !== 1) {
-            currentPlayer += playerRoll;
-            document.getElementById(`$play1 && Play2`);
-        }
-    });
 }
